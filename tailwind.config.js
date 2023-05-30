@@ -18,7 +18,10 @@ export default {
         formItemLabelMobileSM: '1.1rem'
       },
       maxWidth: {
-        inputItemMax: '5rem'
+        inputItemMaxDesktop: '5rem',
+        inputItemMaxTablet: 'auto',
+        half: '50%',
+        threeQuater: '75%'
       }
     }
   },

@@ -5,11 +5,11 @@ export const Footer: React.FC = () => {
     <footer className="bg-borderPurple flex flex-1 items-center justify-center py-5 px-4">
       <span className="text-white text-lg font-normal ">
         Desenvolvido por {''}
-        <a className="text-white  hover:cursor-pointer hover:underline font-semibold ">
+        <a className="text-sky-50  hover:cursor-pointer hover:underline font-black ">
           Felipe Souza
         </a>
         {' & '}
-        <a className="text-white  hover:cursor-pointer hover:underline font-semibold ">
+        <a className="text-sky-50  hover:cursor-pointer hover:underline font-black ">
           Livia Martins
         </a>
       </span>
