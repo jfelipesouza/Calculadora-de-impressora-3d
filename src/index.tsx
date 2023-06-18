@@ -7,7 +7,7 @@ export const App: React.FC = () => {
     <>
       <main
         className={
-          'flex flex-1  min-h-screen max-w-full w-screen py-10 min-[350px]:px-5 px-2 bg-background '
+          'flex flex-1 flex-col gap-8 min-h-screen max-w-full w-screen py-10 min-[350px]:px-5 px-2 bg-background '
         }
       >
         <Form />
