@@ -22,6 +22,9 @@ export default {
         inputItemMaxTablet: 'auto',
         half: '50%',
         threeQuater: '75%'
+      },
+      fontFamily: {
+        sans: ['Roboto']
       }
     }
   },
