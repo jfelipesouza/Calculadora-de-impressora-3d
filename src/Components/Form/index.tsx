@@ -285,7 +285,7 @@ export const Form: React.FC = () => {
             <Box>
               <ResultField
                 content={formatMoney(total.rezin)}
-                name={'Total Rezina'}
+                name={'Total Resina'}
               />
               <ResultField
                 content={formatMoney(total.energie)}
