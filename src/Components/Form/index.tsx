@@ -117,8 +117,13 @@ export const Form: React.FC = () => {
     }
     if (machine.value > 0 && machine.life > 0) {
       let total = 0
-      if (hours > 0) {
-        total = (machine.value * hours) / machine.life
+      if (hours > 0 && minutes <= 0) {
+        total =
+          (machine.value * ((seconds > 29 ? 1 : 0) + (hours * 60) / 60)) /
+          machine.life
+      } else if (hours > 0 && minutes > 0) {
+        total = (minutes + (seconds > 29 ? 1 : 0) + hours * 60) / 60
+        total = (machine.value * total) / machine.life
       }
       if (extra > 0) {
         total += extra
