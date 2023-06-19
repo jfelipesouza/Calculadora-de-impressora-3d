@@ -140,7 +140,6 @@ export const Form: React.FC = () => {
 
   useEffect(() => {
     handleCalc()
-    console.log({ time, rezin, machine, extra, energie })
   }, [time, rezin, machine, extra, energie, handleCalc])
 
   useEffect(() => {
