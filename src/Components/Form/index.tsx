@@ -33,7 +33,7 @@ export const Form: React.FC = () => {
   })
   const [machine, setMachine] = useState<MachineObject>({
     value: 2000,
-    life: 150,
+    life: 2000,
     consume: 72
   })
 
@@ -116,15 +116,13 @@ export const Form: React.FC = () => {
       setCusto(prev => ({ ...prev, energie: total }))
     }
     if (machine.value > 0 && machine.life > 0) {
-      let total = 0
+      let total = 1
       if (hours > 0 && minutes <= 0) {
-        total =
-          (machine.value * ((seconds > 29 ? 1 : 0) + (hours * 60) / 60)) /
-          machine.life
+        total = ((seconds > 29 ? 1 : 0) + hours * 60) / 60
       } else if (hours > 0 && minutes > 0) {
         total = (minutes + (seconds > 29 ? 1 : 0) + hours * 60) / 60
-        total = (machine.value * total) / machine.life
       }
+      total = (machine.value * total) / machine.life
       if (extra > 0) {
         total += extra
       }
