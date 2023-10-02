@@ -40,7 +40,6 @@ export const Form: React.FC = () => {
   const [total, setTotal] = useState({ rezin: 150, energie: 200, liquid: 160 })
 
   const [extra, setExtra] = useState(0)
-  const [extraVolume, setExtraVolume] = useState(0)
   const [energie, setEnergie] = useState(0.89)
   const [lucro, setLucro] = useState({ value: 40 })
 
@@ -88,12 +87,9 @@ export const Form: React.FC = () => {
         return { ...prev, value: valueItem }
       })
     } else if (id === 'ml') {
-      Promise.all([
-        setRezin(prev => {
-          return { ...prev, ml: valueItem }
-        }),
-        setExtraVolume(valueItem * 0.1 + valueItem)
-      ])
+      setRezin(prev => {
+        return { ...prev, ml: valueItem }
+      })
     }
   }
 
