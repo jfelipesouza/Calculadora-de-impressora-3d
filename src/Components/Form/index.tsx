@@ -40,6 +40,7 @@ export const Form: React.FC = () => {
   const [total, setTotal] = useState({ rezin: 150, energie: 200, liquid: 160 })
 
   const [extra, setExtra] = useState(0)
+  const [extraVolume, setExtraVolume] = useState(0)
   const [energie, setEnergie] = useState(0.89)
   const [lucro, setLucro] = useState({ value: 40 })
 
@@ -80,15 +81,19 @@ export const Form: React.FC = () => {
   const handleUpdateRezin = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     const { id, value } = event.target
+    const valueItem = Number(value)
 
     if (id === 'value') {
       setRezin(prev => {
-        return { ...prev, value: Number(value) }
+        return { ...prev, value: valueItem }
       })
-    } else {
-      setRezin(prev => {
-        return { ...prev, ml: Number(value) }
-      })
+    } else if (id === 'ml') {
+      Promise.all([
+        setRezin(prev => {
+          return { ...prev, ml: valueItem }
+        }),
+        setExtraVolume(valueItem * 0.1 + valueItem)
+      ])
     }
   }
 
@@ -144,12 +149,14 @@ export const Form: React.FC = () => {
 
   useEffect(() => {
     const liquid = custo.energie + custo.extra + custo.rezin
-    setTotal({
-      energie: custo.energie,
-      liquid,
-      rezin: custo.rezin
-    })
-    setPrice(liquid + liquid * (lucro.value / 100))
+    Promise.all([
+      setTotal({
+        energie: custo.energie,
+        liquid,
+        rezin: custo.rezin
+      }),
+      setPrice(liquid + liquid * (lucro.value / 100))
+    ])
   }, [custo, lucro.value])
 
   return (
@@ -201,7 +208,7 @@ export const Form: React.FC = () => {
           <Box>
             <TextField
               min={0}
-              name={'Valor da resina (R$/L)'}
+              name={'Valor  (R$/L)'}
               type={'number'}
               placeholder={formatMoney(0)}
               id={'value'}
@@ -209,9 +216,9 @@ export const Form: React.FC = () => {
             />
             <TextField
               min={0}
-              name={'Quantidade gasta (ml)'}
+              name={'Quantidade (ml)'}
               type={'number'}
-              placeholder={'0'}
+              placeholder={'0 ml'}
               id={'ml'}
               onChange={handleUpdateRezin}
             />
@@ -256,7 +263,7 @@ export const Form: React.FC = () => {
               min={0}
               name={'Limpeza e modelagem (R$)'}
               type={'number'}
-              placeholder={'0'}
+              placeholder={'R$ 0,00'}
               onChange={event => setExtra(Number(event.target.value))}
             />
           </Box>
@@ -278,7 +285,7 @@ export const Form: React.FC = () => {
       </div>
 
       <div className={'min-[350px]:px-5 px-3'}>
-        <FormItem className={''} title="Resultados">
+        <FormItem title="Resultados">
           <div
             className={
               'flex flex-row gap-x-8 gap-y-8 min-[600px]:justify-between max-[600px]:flex-col'
